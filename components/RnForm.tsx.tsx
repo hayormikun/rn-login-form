@@ -22,6 +22,9 @@ export const RnForm = (props: Props) => {
   const handleSubmit = () => {
     if (validateForm()) {
       console.log("Form submitted with values:", { fullname, password });
+      setFullname("")
+      setPassword("")
+      setErrors({})
     }
   };
 
