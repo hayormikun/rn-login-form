@@ -1,70 +1,89 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import {
+  Image,
+  StyleSheet,
+  SafeAreaView,
+  StatusBar,
+  TextInput,
+  Text,
+  View,
+  Switch,
+} from "react-native";
+import { useState } from "react";
+import { RnForm } from "@/components/RnForm.tsx";
 
 export default function HomeScreen() {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState(false)
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+    <SafeAreaView style={styles.container}>
+      {/* <View style={styles.field}>
+        <TextInput
+          placeholder="Enter fullname"
+          style={styles.input}
+          value={name}
+          onChangeText={setName}
+          // secureTextEntry
+          // keyboardType="numeric"
+          // autoCapitalize="none"
+          // autoCorrect={false}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+        <Text style={styles.text}>{name}</Text>
+      </View>
+      <View style={styles.field}>
+        <TextInput
+          placeholder="Enter message"
+          style={[styles.input, styles.multiline]}
+          multiline
+          value={message}
+          onChangeText={setMessage}
+        />
+        <Text style={styles.text}>{message}</Text>
+      </View>
+      <View style={[styles.field, styles.switchWrap]}>
+        <Text>Dark mode</Text>
+        <Switch value={isDarkMode} trackColor={{false: "#767577", true: "lightblue"}} onValueChange={()=>{
+          setIsDarkMode(!isDarkMode)
+          }
+        }/>
+      </View> */}
+      <RnForm />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#F5F5F5",
+    paddingTop: StatusBar.currentHeight,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  field: {
+    marginHorizontal: 16,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  switchWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
   },
+  input: {
+    backgroundColor: "#FFFFFF",
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+    borderColor: "#D3D3D3",
+    borderWidth: 1,
+    fontSize: 16,
+    color: "#333333",
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#333333",
+    marginTop: 5,
+  },
+  multiline: {
+    minHeight: 100,
+    textAlignVertical: "top"
+  }
 });
